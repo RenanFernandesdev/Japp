@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Japp.Model.Enums;
+﻿using Japp.Model.Enums;
 using Japp.Model;
 using Japp.Controller;
 
@@ -21,6 +12,12 @@ namespace Japp.View
         {
             InitializeComponent();
 
+        }
+
+        private void NewStep_Load(object sender, EventArgs e)
+        {
+            FillParameterType();
+            FillActions();
         }
 
         private void saveStep_Click(object sender, EventArgs e)
@@ -45,6 +42,29 @@ namespace Japp.View
         public void SetProcess(int idProcess)
         {
             _process = idProcess;
+        }
+
+        private void FillParameterType()
+        {
+            string[] actions = Enum.GetNames(typeof(Parameters));
+            foreach (string action in actions)
+            {
+                parameterTypeBox.Items.Add(action);
+            }
+        }
+
+        private void FillActions()
+        {
+            string[] actions = Enum.GetNames(typeof(Actions));
+            foreach (string action in actions)
+            {
+                actionBox.Items.Add(action);
+            }
+        }
+
+        private void NewStep_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

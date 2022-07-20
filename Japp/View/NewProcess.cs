@@ -29,6 +29,7 @@ namespace Japp.View
             ProcessController.Insert(process);
             MessageBox.Show("Processo salvo com sucesso!");
             this.Close();
+            
         }
     }
 }

@@ -232,7 +232,10 @@ namespace Japp.View
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "NewStep";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewStep";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewStep_FormClosing);
+            this.Load += new System.EventHandler(this.NewStep_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -241,29 +244,11 @@ namespace Japp.View
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
-            FillParameterType();
-            FillActions();
         }
 
         #endregion
 
-        private void FillParameterType()
-        {
-            string[] actions = Enum.GetNames(typeof(Parameters));
-            foreach (string action in actions)
-            {
-                parameterTypeBox.Items.Add(action);
-            }
-        }
-
-        private void FillActions()
-        {
-            string[] actions = Enum.GetNames(typeof(Actions));
-            foreach (string action in actions)
-            {
-                actionBox.Items.Add(action);
-            }
-        }
+        
 
         private Panel panel1;
         private Button saveStep;

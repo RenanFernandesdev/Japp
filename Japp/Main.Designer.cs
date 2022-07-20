@@ -8,9 +8,7 @@ namespace Japp
 {
     partial class Main
     {
-        private List<Process> _process;
-        private List<IStep> _steps;
-        private Process _currentProcess;
+        
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -39,6 +37,7 @@ namespace Japp
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.processList = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.newProcess = new System.Windows.Forms.Button();
@@ -51,7 +50,9 @@ namespace Japp
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.descriptionLabel = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSteps)).BeginInit();
@@ -66,22 +67,32 @@ namespace Japp
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.AutoSize = true;
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.panel8);
             this.panel2.Controls.Add(this.processList);
             this.panel2.Location = new System.Drawing.Point(12, 178);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(205, 489);
             this.panel2.TabIndex = 1;
             // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.descriptionLabel);
+            this.panel8.Location = new System.Drawing.Point(3, 349);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(199, 129);
+            this.panel8.TabIndex = 2;
+            // 
             // processList
             // 
             this.processList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.processList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.processList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.processList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
             this.processList.FormattingEnabled = true;
-            this.processList.ItemHeight = 21;
+            this.processList.ItemHeight = 20;
             this.processList.Location = new System.Drawing.Point(3, 3);
             this.processList.Name = "processList";
-            this.processList.Size = new System.Drawing.Size(199, 483);
+            this.processList.Size = new System.Drawing.Size(199, 340);
             this.processList.TabIndex = 1;
             this.processList.SelectedIndexChanged += new System.EventHandler(this.processList_SelectedIndexChanged);
             // 
@@ -197,6 +208,16 @@ namespace Japp
             this.panel7.Size = new System.Drawing.Size(205, 68);
             this.panel7.TabIndex = 5;
             // 
+            // descriptionLabel
+            // 
+            this.descriptionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.descriptionLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.descriptionLabel.Location = new System.Drawing.Point(3, 9);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(191, 106);
+            this.descriptionLabel.TabIndex = 0;
+            this.descriptionLabel.Text = "Descrição";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -209,7 +230,9 @@ namespace Japp
             this.Controls.Add(this.panel2);
             this.Name = "Main";
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.panel2.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -221,11 +244,6 @@ namespace Japp
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            InitComponents();
-            LoadProcess();
-            FillListProcess();
-            SetCurrentProcess(0);
-            LoadSteps(_currentProcess.GetId());
         }
 
         #endregion
@@ -241,80 +259,8 @@ namespace Japp
         private Panel panel6;
         private Panel panel7;
         private Button newProcess;
-
-        private void InitComponents()
-        {
-            _process = new List<Process>();
-            _steps = new List<IStep>();
-        }
-
-        private void LoadProcess()
-        {
-            using (DataTable dt = ProcessController.Select())
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    string idStr = dt.Rows[i][0].ToString();
-                    string name = dt.Rows[i][1].ToString();
-                    string description = dt.Rows[i][2].ToString();
-                    string statusStr = dt.Rows[i][3].ToString();
-
-                    int.TryParse(idStr, out int id);
-                    bool.TryParse(statusStr, out bool status);
-
-                    _process.Add(new Process(id, name, description, status));
-                }
-            }
-        }
-
-        private void FillListProcess()
-        {
-            foreach (Process process in _process)
-            {
-                processList.Items.Add(process.GetName());
-            }
-        }
-
-        private void SetCurrentProcess(int index)
-        {
-            if (index < 0) 
-            {
-                index = 0;
-                processList.SelectedValue = processList.Items[index];
-            }
-            _currentProcess = _process[index];
-        }
-
-        private void LoadSteps(int idProcess)
-        {
-            using(DataTable dt = StepController.Select(idProcess))
-            {
-                
-                gridSteps.DataSource = dt;
-                for(int i = 0; i < dt.Rows.Count; i++)
-                {
-                    string idStr = dt.Rows[i][0].ToString(); //CC
-                    //idProcess
-                    string name = dt.Rows[i][2].ToString();
-                    string description = dt.Rows[i][3].ToString();
-                    string actionStr = dt.Rows[i][4].ToString(); //CC
-                    string parameterTypeStr = dt.Rows[i][5].ToString(); //CC
-                    string parameter = dt.Rows[i][6].ToString();
-                    string statusStr = dt.Rows[i][7].ToString(); //CC
-                    string timeStr = dt.Rows[i][8].ToString(); //CC
-
-                    int.TryParse(idStr, out int id);
-                    int.TryParse(actionStr, out int action);
-                    int.TryParse(parameterTypeStr, out int parameterType);
-                    bool.TryParse(statusStr, out bool status);
-                    int.TryParse(timeStr, out int time);
-
-                    IStep step = new IStep(id,idProcess,name,description,(Actions) action,(Parameters) parameterType,parameter,string.Empty,status,time);
-                    _steps.Add(step);
-                }
-            }
-        }
-
         private DataGridView gridSteps;
+        private Panel panel8;
+        private Label descriptionLabel;
     }
 }

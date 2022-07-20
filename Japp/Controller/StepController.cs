@@ -123,13 +123,13 @@ namespace Japp.Controller
 
             using (Connection con = new Connection())
             {
-                string command = "SELECT * FROM steps WHERE @id";
+                string command = "SELECT * FROM steps WHERE idprocess = @idprocess";
 
                 try
                 {
                     using (MySqlCommand cmd = new MySqlCommand(command, con.Conectar()))
                     {
-                        cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = idProcess;
+                        cmd.Parameters.Add("@idprocess", MySqlDbType.Int32).Value = idProcess;
                         cmd.CommandText = command;
 
                         da.SelectCommand = cmd;
