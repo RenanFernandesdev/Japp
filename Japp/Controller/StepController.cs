@@ -31,7 +31,7 @@ namespace Japp.Controller
                     cmd.Parameters.Add("@parameter", MySqlDbType.VarString).Value = step.GetParameter();
                     cmd.Parameters.Add("@status", MySqlDbType.Byte).Value = step.IsStatus();
                     cmd.Parameters.Add("@time", MySqlDbType.Int32).Value = step.GetTime();
-
+                    /// Teste
                     cmd.CommandText = command;
 
                     try
