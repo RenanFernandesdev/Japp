@@ -113,6 +113,8 @@ namespace Japp
                 {
 
                     gridSteps.DataSource = dt;
+                    ConfigGrid();
+
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         string idStr = dt.Rows[i][0].ToString(); //CC
@@ -134,14 +136,27 @@ namespace Japp
                         IStep step = new IStep(id, idProcess, name, description, (Actions)action, (Parameters)parameterType, parameter, string.Empty, status, time);
                         _steps.Add(step);
                     }
+                    _currentProcess.SetSteps(_steps);
                 }
             }
         }
-
-        public void FillGrid()
+        
+        public void ConfigGrid()
         {
-            gridSteps.DataSource = null;
-            LoadSteps(_currentProcess.GetId());
+            gridSteps.Columns[0].Visible = false;
+            gridSteps.Columns[1].Visible = false;
+
+            gridSteps.Columns[2].ReadOnly = true;
+            gridSteps.Columns[3].ReadOnly = true;
+            gridSteps.Columns[4].ReadOnly = true;
+            gridSteps.Columns[5].ReadOnly = true;
+            gridSteps.Columns[6].ReadOnly = true;
+            gridSteps.Columns[8].ReadOnly = true;
+        }
+
+        private void executeProcess_Click(object sender, EventArgs e)
+        {
+            ProcessController.Execute(_currentProcess);
         }
     }
 }

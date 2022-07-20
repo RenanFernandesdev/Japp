@@ -47,7 +47,6 @@ namespace Japp.Controller
                 }
             }
         }
-
         public static void Update(IStep step)
         {
             using (Connection con = new Connection())
@@ -89,7 +88,6 @@ namespace Japp.Controller
                 }
             }
         }
-
         public static void Delete(IStep step)
         {
             using (Connection con = new Connection())
@@ -115,7 +113,6 @@ namespace Japp.Controller
 
             }
         }
-
         public static DataTable Select(int idProcess)
         {
             MySqlDataAdapter da = new MySqlDataAdapter();
@@ -123,7 +120,16 @@ namespace Japp.Controller
 
             using (Connection con = new Connection())
             {
-                string command = "SELECT * FROM steps WHERE idprocess = @idprocess";
+                string command = "SELECT id, " +
+                                        "idprocess, " +
+                                        "name as 'Nome', " +
+                                        "description as 'Descrição', " +
+                                        "action as 'Ação', " +
+                                        "parameterType as 'Tipo de parâmetro', " +
+                                        "parameter as 'Parâmetro', " +
+                                        "text as 'Texto', " +
+                                        "status as 'Status', " +
+                                        "time as 'Tempo (em milissegundos)' FROM steps WHERE idprocess = @idprocess";
 
                 try
                 {

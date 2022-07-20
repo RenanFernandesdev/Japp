@@ -11,6 +11,7 @@ namespace Japp.Model.Enums
         Id,
         Name,
         XPath,
-        CssSelector
+        CssSelector,
+        Link
     }
 }

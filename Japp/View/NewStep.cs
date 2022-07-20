@@ -26,14 +26,16 @@ namespace Japp.View
             string description = descriptionStepBox.Text;
             string actionStr = actionBox.Text;
             string typeStr = parameterTypeBox.Text;
+            string text = textBox.Text;
             string parameter = parameterBox.Text;
             string timeStr = timeBox.Text;
 
-            int.TryParse(actionStr, out int action);
-            int.TryParse(typeStr, out int type);
             int.TryParse(timeStr, out int time);
 
-            IStep step = new IStep(this._process, name, description, (Actions) action, (Parameters) type, parameter, "", true, time);
+            Actions action = (Actions) Enum.Parse(typeof(Actions), actionStr);
+            Parameters type = (Parameters)Enum.Parse(typeof(Parameters), typeStr);
+
+            IStep step = new IStep(this._process, name, description, action, (Parameters) type, parameter, text, true, time);
             StepController.Insert(step);
             MessageBox.Show("Step salvo com sucesso!");
             this.Close();

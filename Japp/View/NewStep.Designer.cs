@@ -49,6 +49,8 @@ namespace Japp.View
             this.parameterTypeBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.actionBox = new System.Windows.Forms.ComboBox();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -138,6 +140,8 @@ namespace Japp.View
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.textBox);
+            this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.timeBox);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.parameterBox);
@@ -148,12 +152,12 @@ namespace Japp.View
             this.panel3.Controls.Add(this.actionBox);
             this.panel3.Location = new System.Drawing.Point(2, 261);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(362, 272);
+            this.panel3.Size = new System.Drawing.Size(362, 327);
             this.panel3.TabIndex = 2;
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(10, 223);
+            this.timeBox.Location = new System.Drawing.Point(10, 283);
             this.timeBox.Name = "timeBox";
             this.timeBox.Size = new System.Drawing.Size(342, 23);
             this.timeBox.TabIndex = 11;
@@ -162,7 +166,7 @@ namespace Japp.View
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(10, 203);
+            this.label7.Location = new System.Drawing.Point(10, 263);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(165, 17);
             this.label7.TabIndex = 10;
@@ -223,11 +227,28 @@ namespace Japp.View
             this.actionBox.Size = new System.Drawing.Size(342, 23);
             this.actionBox.TabIndex = 0;
             // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(10, 222);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(342, 23);
+            this.textBox.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(10, 202);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 17);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Texto";
+            // 
             // NewStep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 536);
+            this.ClientSize = new System.Drawing.Size(366, 590);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -267,5 +288,7 @@ namespace Japp.View
         private Label label6;
         private TextBox timeBox;
         private Label label7;
+        private TextBox textBox;
+        private Label label8;
     }
 }

@@ -7,6 +7,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Japp.Controller
 {
@@ -42,7 +44,6 @@ namespace Japp.Controller
                 }
             }
         }
-
         public static void Update(Process process)
         {
             using (Connection con = new Connection())
@@ -74,7 +75,6 @@ namespace Japp.Controller
                 }
             }
         }
-
         public static void Delete(Process process)
         {
             using (Connection con = new Connection())
@@ -100,7 +100,6 @@ namespace Japp.Controller
 
             }
         }
-
         public static DataTable Select()
         {
             MySqlDataAdapter da = new MySqlDataAdapter();
@@ -127,6 +126,20 @@ namespace Japp.Controller
                 }
             }
             return dt;
+        }
+
+        public static void Execute(Process process)
+        {
+            using(IWebDriver driver = new ChromeDriver())
+            {
+                
+                foreach(var step in process.GetSteps())
+                {
+                    StepBuilder stb = new StepBuilder(driver, step);
+                    stb.ExecuteVoid();
+                }
+                MessageBox.Show("Sucesso!");
+            }
         }
     }
 }

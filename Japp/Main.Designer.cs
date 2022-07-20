@@ -36,8 +36,11 @@ namespace Japp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.descriptionLabel = new System.Windows.Forms.Label();
             this.processList = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.newProcess = new System.Windows.Forms.Button();
@@ -50,7 +53,7 @@ namespace Japp
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.descriptionLabel = new System.Windows.Forms.Label();
+            this.executeProcess = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -71,7 +74,7 @@ namespace Japp
             this.panel2.Controls.Add(this.processList);
             this.panel2.Location = new System.Drawing.Point(12, 178);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(205, 489);
+            this.panel2.Size = new System.Drawing.Size(205, 484);
             this.panel2.TabIndex = 1;
             // 
             // panel8
@@ -82,6 +85,16 @@ namespace Japp
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(199, 129);
             this.panel8.TabIndex = 2;
+            // 
+            // descriptionLabel
+            // 
+            this.descriptionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.descriptionLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.descriptionLabel.Location = new System.Drawing.Point(3, 9);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(191, 106);
+            this.descriptionLabel.TabIndex = 0;
+            this.descriptionLabel.Text = "Descrição";
             // 
             // processList
             // 
@@ -137,17 +150,36 @@ namespace Japp
             this.panel3.Controls.Add(this.gridSteps);
             this.panel3.Location = new System.Drawing.Point(220, 178);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(608, 489);
+            this.panel3.Size = new System.Drawing.Size(877, 484);
             this.panel3.TabIndex = 2;
             // 
             // gridSteps
             // 
+            this.gridSteps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridSteps.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.gridSteps.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridSteps.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridSteps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridSteps.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridSteps.Location = new System.Drawing.Point(7, 10);
+            this.gridSteps.MultiSelect = false;
             this.gridSteps.Name = "gridSteps";
             this.gridSteps.RowTemplate.Height = 25;
-            this.gridSteps.Size = new System.Drawing.Size(594, 468);
+            this.gridSteps.Size = new System.Drawing.Size(863, 468);
             this.gridSteps.TabIndex = 0;
             // 
             // panel5
@@ -157,14 +189,14 @@ namespace Japp
             this.panel5.Controls.Add(this.label2);
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(602, 63);
+            this.panel5.Size = new System.Drawing.Size(199, 63);
             this.panel5.TabIndex = 2;
             // 
             // newStep
             // 
             this.newStep.BackColor = System.Drawing.Color.White;
             this.newStep.Image = ((System.Drawing.Image)(resources.GetObject("newStep.Image")));
-            this.newStep.Location = new System.Drawing.Point(538, 3);
+            this.newStep.Location = new System.Drawing.Point(135, 3);
             this.newStep.Name = "newStep";
             this.newStep.Size = new System.Drawing.Size(59, 55);
             this.newStep.TabIndex = 2;
@@ -187,16 +219,17 @@ namespace Japp
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(102)))));
             this.panel1.Location = new System.Drawing.Point(12, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 98);
+            this.panel1.Size = new System.Drawing.Size(1085, 98);
             this.panel1.TabIndex = 3;
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
+            this.panel6.Controls.Add(this.executeProcess);
             this.panel6.Controls.Add(this.panel5);
             this.panel6.Location = new System.Drawing.Point(220, 106);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(608, 69);
+            this.panel6.Size = new System.Drawing.Size(877, 69);
             this.panel6.TabIndex = 4;
             // 
             // panel7
@@ -208,21 +241,21 @@ namespace Japp
             this.panel7.Size = new System.Drawing.Size(205, 68);
             this.panel7.TabIndex = 5;
             // 
-            // descriptionLabel
+            // executeProcess
             // 
-            this.descriptionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.descriptionLabel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.descriptionLabel.Location = new System.Drawing.Point(3, 9);
-            this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(191, 106);
-            this.descriptionLabel.TabIndex = 0;
-            this.descriptionLabel.Text = "Descrição";
+            this.executeProcess.Location = new System.Drawing.Point(783, 13);
+            this.executeProcess.Name = "executeProcess";
+            this.executeProcess.Size = new System.Drawing.Size(87, 42);
+            this.executeProcess.TabIndex = 3;
+            this.executeProcess.Text = "button1";
+            this.executeProcess.UseVisualStyleBackColor = true;
+            this.executeProcess.Click += new System.EventHandler(this.executeProcess_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 683);
+            this.ClientSize = new System.Drawing.Size(1109, 678);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel1);
@@ -262,5 +295,6 @@ namespace Japp
         private DataGridView gridSteps;
         private Panel panel8;
         private Label descriptionLabel;
+        private Button executeProcess;
     }
 }

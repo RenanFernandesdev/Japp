@@ -13,6 +13,8 @@ namespace Japp.Model.Enums
         SendKeys,
         Displayed,
         Navigate,
-        Sleep
+        Sleep,
+        Loop
+
     }
 }
