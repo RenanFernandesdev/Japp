@@ -124,8 +124,9 @@ namespace Japp
                         string actionStr = dt.Rows[i][4].ToString(); //CC
                         string parameterTypeStr = dt.Rows[i][5].ToString(); //CC
                         string parameter = dt.Rows[i][6].ToString();
-                        string statusStr = dt.Rows[i][7].ToString(); //CC
-                        string timeStr = dt.Rows[i][8].ToString(); //CC
+                        string text = dt.Rows[i][7].ToString();
+                        string statusStr = dt.Rows[i][8].ToString(); //CC
+                        string timeStr = dt.Rows[i][9].ToString(); //CC
 
                         int.TryParse(idStr, out int id);
                         int.TryParse(actionStr, out int action);
@@ -133,7 +134,7 @@ namespace Japp
                         bool.TryParse(statusStr, out bool status);
                         int.TryParse(timeStr, out int time);
 
-                        IStep step = new IStep(id, idProcess, name, description, (Actions)action, (Parameters)parameterType, parameter, string.Empty, status, time);
+                        IStep step = new IStep(id, idProcess, name, description, (Actions)action, (Parameters)parameterType, parameter, text, status, time);
                         _steps.Add(step);
                     }
                     _currentProcess.SetSteps(_steps);

@@ -14,7 +14,6 @@ namespace Japp.Model.Enums
         Displayed,
         Navigate,
         Sleep,
-        Loop
-
+        PressEnter
     }
 }

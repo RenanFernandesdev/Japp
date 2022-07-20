@@ -132,7 +132,7 @@ namespace Japp.Controller
         {
             using(IWebDriver driver = new ChromeDriver())
             {
-                
+                driver.Manage().Window.Maximize();
                 foreach(var step in process.GetSteps())
                 {
                     StepBuilder stb = new StepBuilder(driver, step);

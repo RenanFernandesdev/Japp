@@ -41,6 +41,9 @@ namespace Japp.Model
                 case Actions.Navigate:
                     _driver.Navigate().GoToUrl(_step.GetParameter());
                     break;
+                case Actions.PressEnter:
+                    SendKeys.Send("{ENTER}");
+                    break;
             }
         }
         public string ExecuteString()

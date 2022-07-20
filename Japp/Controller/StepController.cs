@@ -13,13 +13,14 @@ namespace Japp.Controller
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    string command = "INSERT INTO steps (idprocess, name, description, action, parameterType, parameter, status, time) " +
+                    string command = "INSERT INTO steps (idprocess, name, description, action, parameterType, parameter, text, status, time) " +
                                      "VALUES (@idprocess," +
                                      "@name, " +
                                      "@description, " +
                                      "@action, " +
                                      "@parameterType, " +
                                      "@parameter, " +
+                                     "@text, " +
                                      "@status, " +
                                      "@time)";
 
@@ -29,6 +30,7 @@ namespace Japp.Controller
                     cmd.Parameters.Add("@action", MySqlDbType.Int32).Value = (int?)step.GetActions();
                     cmd.Parameters.Add("@parameterType", MySqlDbType.Int32).Value = (int?)step.GetParameterType();
                     cmd.Parameters.Add("@parameter", MySqlDbType.VarString).Value = step.GetParameter();
+                    cmd.Parameters.Add("@text", MySqlDbType.VarString).Value = step.GetText();
                     cmd.Parameters.Add("@status", MySqlDbType.Byte).Value = step.IsStatus();
                     cmd.Parameters.Add("@time", MySqlDbType.Int32).Value = step.GetTime();
 
