@@ -1,5 +1,6 @@
 ﻿using Japp.Model.Enums;
 using Japp.Model;
+using Japp.Controller.Actions;
 using Japp.Controller;
 
 namespace Japp.View
@@ -19,33 +20,28 @@ namespace Japp.View
             FillParameterType();
             FillActions();
         }
-
         private void saveStep_Click(object sender, EventArgs e)
         {
             string name = nameStepBox.Text;
             string description = descriptionStepBox.Text;
-            string actionStr = actionBox.Text;
+            string action = actionBox.Text;
             string typeStr = parameterTypeBox.Text;
             string text = textBox.Text;
             string parameter = parameterBox.Text;
             string timeStr = timeBox.Text;
 
             int.TryParse(timeStr, out int time);
-
-            Actions action = (Actions) Enum.Parse(typeof(Actions), actionStr);
             Parameters type = (Parameters)Enum.Parse(typeof(Parameters), typeStr);
 
-            IStep step = new IStep(this._process, name, description, action,type, parameter, text, true, time);
+            IStep step = new IStep(this._process, name, description, action, type, parameter, text, true, time);
             StepController.Insert(step);
             MessageBox.Show("Step salvo com sucesso!");
             this.Close();
         }
-
         public void SetProcess(int idProcess)
         {
             _process = idProcess;
         }
-
         private void FillParameterType()
         {
             string[] actions = Enum.GetNames(typeof(Parameters));
@@ -57,8 +53,10 @@ namespace Japp.View
 
         private void FillActions()
         {
-            string[] actions = Enum.GetNames(typeof(Actions));
-            foreach (string action in actions)
+            IActions actions = new ActionRun();
+            string[] actionsList = actions.ActionsDict.Keys.ToArray();
+
+            foreach (string action in actionsList)
             {
                 actionBox.Items.Add(action);
             }

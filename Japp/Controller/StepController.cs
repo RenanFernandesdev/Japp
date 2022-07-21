@@ -27,7 +27,7 @@ namespace Japp.Controller
                     cmd.Parameters.Add("@idprocess", MySqlDbType.Int32).Value = step.GetIdProcess();
                     cmd.Parameters.Add("@name", MySqlDbType.VarString).Value = step.GetName();
                     cmd.Parameters.Add("@description", MySqlDbType.VarString).Value = step.GetDescription();
-                    cmd.Parameters.Add("@action", MySqlDbType.Int32).Value = (int?)step.GetActions();
+                    cmd.Parameters.Add("@action", MySqlDbType.VarString).Value = step.GetActions();
                     cmd.Parameters.Add("@parameterType", MySqlDbType.Int32).Value = (int?)step.GetParameterType();
                     cmd.Parameters.Add("@parameter", MySqlDbType.VarString).Value = step.GetParameter();
                     cmd.Parameters.Add("@text", MySqlDbType.VarString).Value = step.GetText();
@@ -62,6 +62,7 @@ namespace Japp.Controller
                                                     "action = @action, " +
                                                     "parameterType = @parameterType, " +
                                                     "parameter = @parameter, " +
+                                                    "text = @text, " +
                                                     "status = @status," +
                                                     "time = @time " +
                                                     "WHERE id = @id";
@@ -69,9 +70,10 @@ namespace Japp.Controller
                     cmd.Parameters.Add("@idprocess", MySqlDbType.Int32).Value = step.GetIdProcess();
                     cmd.Parameters.Add("@name", MySqlDbType.VarString).Value = step.GetName();
                     cmd.Parameters.Add("@description", MySqlDbType.VarString).Value = step.GetDescription();
-                    cmd.Parameters.Add("@action", MySqlDbType.Int32).Value = (int?)step.GetActions();
+                    cmd.Parameters.Add("@action", MySqlDbType.Int32).Value = step.GetActions();
                     cmd.Parameters.Add("@parameterType", MySqlDbType.Int32).Value = (int?)step.GetParameterType();
                     cmd.Parameters.Add("@parameter", MySqlDbType.VarString).Value = step.GetParameter();
+                    cmd.Parameters.Add("@text", MySqlDbType.VarString).Value = step.GetText();
                     cmd.Parameters.Add("@status", MySqlDbType.Byte).Value = step.IsStatus();
                     cmd.Parameters.Add("@time", MySqlDbType.Int32).Value = step.GetTime();
                     cmd.Parameters.Add("@id", MySqlDbType.Int32).Value = step.GetId();
@@ -132,7 +134,6 @@ namespace Japp.Controller
                                         "text as 'Texto', " +
                                         "status as 'Status', " +
                                         "time as 'Tempo (em milissegundos)' FROM steps WHERE idprocess = @idprocess";
-
                 try
                 {
                     using (MySqlCommand cmd = new MySqlCommand(command, con.Conectar()))

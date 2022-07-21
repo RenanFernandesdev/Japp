@@ -136,7 +136,7 @@ namespace Japp.Controller
                 foreach(var step in process.GetSteps())
                 {
                     StepBuilder stb = new StepBuilder(driver, step);
-                    stb.ExecuteVoid();
+                    stb.Execute();
                 }
                 MessageBox.Show("Sucesso!");
             }

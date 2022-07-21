@@ -29,21 +29,18 @@ namespace Japp
                 LoadSteps(_currentProcess.GetId());
             }
         }
-
         private void newProcess_Click(object sender, EventArgs e)
         {
             NewProcess np = new NewProcess();
             np.Show();
             
         }
-
         private void newStep_Click(object sender, EventArgs e)
         {
             NewStep nt = new NewStep();
             nt.SetProcess(_currentProcess.GetId());
             nt.Show();
         }
-
         private void processList_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetCurrentProcess(processList.SelectedIndex);
@@ -57,7 +54,6 @@ namespace Japp
             _process = new List<Process>();
             _steps = new List<IStep>();
         }
-
         public void LoadProcess()
         {
             _process.Clear();
@@ -77,7 +73,6 @@ namespace Japp
                 }
             }
         }
-
         private void FillListProcess()
         {
             processList.Items.Clear();
@@ -89,7 +84,6 @@ namespace Japp
                 }
             }
         }
-
         private void SetCurrentProcess(int index)
         {
             if (index < 0)
@@ -117,42 +111,49 @@ namespace Japp
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        string idStr = dt.Rows[i][0].ToString(); //CC
+                        string? idStr = dt.Rows[i][0].ToString(); //CC
                                                                  //idProcess
-                        string name = dt.Rows[i][2].ToString();
-                        string description = dt.Rows[i][3].ToString();
-                        string actionStr = dt.Rows[i][4].ToString(); //CC
-                        string parameterTypeStr = dt.Rows[i][5].ToString(); //CC
-                        string parameter = dt.Rows[i][6].ToString();
-                        string text = dt.Rows[i][7].ToString();
-                        string statusStr = dt.Rows[i][8].ToString(); //CC
-                        string timeStr = dt.Rows[i][9].ToString(); //CC
+                        string? name = dt.Rows[i][2].ToString();
+                        string? description = dt.Rows[i][3].ToString();
+                        string? action = dt.Rows[i][4].ToString(); //CC
+                        string? parameterTypeStr = dt.Rows[i][5].ToString(); //CC
+                        string? parameter = dt.Rows[i][6].ToString();
+                        string? text = dt.Rows[i][7].ToString();
+                        string? statusStr = dt.Rows[i][8].ToString(); //CC
+                        string? timeStr = dt.Rows[i][9].ToString(); //CC
 
                         int.TryParse(idStr, out int id);
-                        int.TryParse(actionStr, out int action);
                         int.TryParse(parameterTypeStr, out int parameterType);
                         bool.TryParse(statusStr, out bool status);
                         int.TryParse(timeStr, out int time);
 
-                        IStep step = new IStep(id, idProcess, name, description, (Actions)action, (Parameters)parameterType, parameter, text, status, time);
+                        IStep step = new IStep(id, idProcess, name, description, action, (Parameters)parameterType, parameter, text, status, time);
                         _steps.Add(step);
                     }
                     _currentProcess.SetSteps(_steps);
                 }
             }
         }
-        
         public void ConfigGrid()
         {
-            gridSteps.Columns[0].Visible = false;
-            gridSteps.Columns[1].Visible = false;
-
-            gridSteps.Columns[2].ReadOnly = true;
-            gridSteps.Columns[3].ReadOnly = true;
-            gridSteps.Columns[4].ReadOnly = true;
-            gridSteps.Columns[5].ReadOnly = true;
-            gridSteps.Columns[6].ReadOnly = true;
-            gridSteps.Columns[8].ReadOnly = true;
+            for(int i = 0; i < 9; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                    case 1:
+                        gridSteps.Columns[i].Visible = false; 
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 8:
+                        gridSteps.Columns[i].ReadOnly = true;
+                        break;
+                }
+            }
         }
 
         private void executeProcess_Click(object sender, EventArgs e)

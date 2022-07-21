@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Japp.Model.Enums;
+﻿using Japp.Model.Enums;
 using OpenQA.Selenium;
+using Japp.Controller.Actions;
 
 namespace Japp.Model
 {
     internal class StepBuilder
     {
         private IWebDriver _driver;
-        private IWebElement _element;
+        private IWebElement? _element = null;
         private IStep _step;
 
         public StepBuilder(IWebDriver driver, IStep step)
@@ -20,37 +16,15 @@ namespace Japp.Model
             _step = step;
         }
 
-        public void ExecuteVoid()
+        public string Execute()
         {
-            ElementBuilder();
-            Actions action = _step.GetActions();
-            switch (action)
-            {
-                case Actions.Click:
-                    _element.Click();
-                    break;
-                case Actions.Clear:
-                    _element.Clear();
-                    break;
-                case Actions.Sleep:
-                    Thread.Sleep(_step.GetTime());
-                    break;
-                case Actions.SendKeys:
-                    _element.SendKeys(_step.GetText());
-                    break;
-                case Actions.Navigate:
-                    _driver.Navigate().GoToUrl(_step.GetParameter());
-                    break;
-                case Actions.PressEnter:
-                    SendKeys.Send("{ENTER}");
-                    break;
-            }
-        }
-        public string ExecuteString()
-        {
-            ElementBuilder();
+            //ElementBuilder();
+
+            IActions actions = new ActionRun();
+            actions.Execute(_driver, _element, _step);
             return _element.Text;
         }
+
         private void ElementBuilder()
         {
             Parameters parameterType = _step.GetParameterType();
