@@ -8,7 +8,7 @@ namespace Japp.Controller.Actions
         public override object Execute(params object[] obj)
         {
             string result = string.Empty;
-            IStep parametro = (IStep)obj[2];
+            IStep parametro = (IStep)obj[1];
             IWebDriver driver = (IWebDriver)obj[0];
 
             driver.Navigate().GoToUrl(parametro.GetParameter());

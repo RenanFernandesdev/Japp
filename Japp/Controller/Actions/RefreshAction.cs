@@ -1,18 +1,21 @@
 ﻿using Japp.Model;
 using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Japp.Controller.Actions
 {
-    internal class DisplayedAction : IActions
+    internal class RefreshAction : IActions
     {
         public override object Execute(params object[] obj)
         {
-            bool result;
+            string result = string.Empty;
             IWebDriver driver = (IWebDriver)obj[0];
-            IStep step = (IStep)obj[1];
-            IWebElement element = ElementBuilder(driver, step);
 
-            result = element.Displayed ? true : false;
+            driver.Navigate().Refresh();
 
             return result;
         }

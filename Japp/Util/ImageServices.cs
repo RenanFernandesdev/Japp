@@ -40,12 +40,12 @@ namespace Japp.Util
                 _bitmap.Save(filename, format);
             }
         }
-        public static byte[] ImageToByte(Image img)
+        public byte[] ImageToByte(Image img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
-        public static String Gethtmlform(string Url)
+        public String Gethtmlform(string Url)
         {
 
             HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(Url);
@@ -58,11 +58,12 @@ namespace Japp.Util
 
             return result;
         }
-        public static string Captcharesult(Byte[] ImageByte, string key)
+        public string Captcharesult(Byte[] ImageByte)
         {
             //POST
             try
             {
+                string key = "35qn6pbkfmsgmal4nhcfxuwzatvqe0zo";
                 ServicePointManager.Expect100Continue = false;
                 var request = (HttpWebRequest)WebRequest.Create("http://azcaptcha.com/in.php");
                 string base64string = Convert.ToBase64String(ImageByte);

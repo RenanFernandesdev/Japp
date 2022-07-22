@@ -1,6 +1,7 @@
 ﻿using Japp.Model.Enums;
 using Japp.Model;
 using Japp.Controller.Actions;
+using Japp.Controller.ParameterType;
 using Japp.Controller;
 
 namespace Japp.View
@@ -25,13 +26,12 @@ namespace Japp.View
             string name = nameStepBox.Text;
             string description = descriptionStepBox.Text;
             string action = actionBox.Text;
-            string typeStr = parameterTypeBox.Text;
+            string type = parameterTypeBox.Text;
             string text = textBox.Text;
             string parameter = parameterBox.Text;
             string timeStr = timeBox.Text;
 
             int.TryParse(timeStr, out int time);
-            Parameters type = (Parameters)Enum.Parse(typeof(Parameters), typeStr);
 
             IStep step = new IStep(this._process, name, description, action, type, parameter, text, true, time);
             StepController.Insert(step);
@@ -44,13 +44,13 @@ namespace Japp.View
         }
         private void FillParameterType()
         {
-            string[] actions = Enum.GetNames(typeof(Parameters));
-            foreach (string action in actions)
+            IParameterType parameterType = new ParameterBuild();
+            string[] pType = parameterType.IParameterTypeDict.Keys.ToArray();
+            foreach (string pt in pType)
             {
-                parameterTypeBox.Items.Add(action);
+                parameterTypeBox.Items.Add(pt);
             }
         }
-
         private void FillActions()
         {
             IActions actions = new ActionRun();
@@ -60,11 +60,6 @@ namespace Japp.View
             {
                 actionBox.Items.Add(action);
             }
-        }
-
-        private void NewStep_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
     }
 }

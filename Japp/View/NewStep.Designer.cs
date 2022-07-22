@@ -255,7 +255,6 @@ namespace Japp.View
             this.Name = "NewStep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewStep";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewStep_FormClosing);
             this.Load += new System.EventHandler(this.NewStep_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

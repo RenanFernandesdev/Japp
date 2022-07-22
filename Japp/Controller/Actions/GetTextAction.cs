@@ -1,10 +1,9 @@
 ﻿using Japp.Model;
 using OpenQA.Selenium;
 
-
 namespace Japp.Controller.Actions
 {
-    internal class ClearAction : IActions
+    internal class GetTextAction : IActions
     {
         public override string Execute(params object[] obj)
         {
@@ -12,8 +11,10 @@ namespace Japp.Controller.Actions
             IWebDriver driver = (IWebDriver)obj[0];
             IStep step = (IStep)obj[1];
             IWebElement element = ElementBuilder(driver, step);
-            
-            element.Clear();
+            result = element.Text;
+
+            MessageBox.Show(result);
+
             return result;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Japp.Model.Enums;
 using OpenQA.Selenium;
 using Japp.Controller.Actions;
+using Japp.Controller.ParameterType;
 
 namespace Japp.Model
 {
@@ -16,43 +17,13 @@ namespace Japp.Model
             _step = step;
         }
 
-        public string Execute()
+        public object Execute()
         {
-            //ElementBuilder();
-
             IActions actions = new ActionRun();
-            actions.Execute(_driver, _element, _step);
-            return _element.Text;
+            object result =  actions.Execute(_driver, _step);
+            return result;
         }
 
-        private void ElementBuilder()
-        {
-            Parameters parameterType = _step.GetParameterType();
-            string parameter = _step.GetParameter();
-            By _by;
-            switch (parameterType)
-            {
-                case Parameters.XPath:
-                    _by = By.XPath(parameter);
-                    break;
-                case Parameters.Id:
-                    _by = By.Id(parameter);
-                    break;
-                case Parameters.Name:
-                    _by = By.Name(parameter);
-                    break;
-                case Parameters.CssSelector:
-                    _by = By.CssSelector(parameter);
-                    break;
-                default:
-                    _by = null;
-                    break;
-            }
-            if (_by != null)
-            {
-                _element = _driver.FindElement(_by);
-            }
-        }
         //Getters
         public IWebDriver GetDriver() { return _driver; }
         public IWebElement GetElement() { return _element; }
