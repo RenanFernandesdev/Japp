@@ -63,7 +63,7 @@ namespace Japp.Util
             //POST
             try
             {
-                string key = "35qn6pbkfmsgmal4nhcfxuwzatvqe0zo";
+                string key = "";
                 ServicePointManager.Expect100Continue = false;
                 var request = (HttpWebRequest)WebRequest.Create("http://azcaptcha.com/in.php");
                 string base64string = Convert.ToBase64String(ImageByte);
