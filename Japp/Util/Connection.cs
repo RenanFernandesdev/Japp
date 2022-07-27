@@ -14,7 +14,7 @@ namespace Japp.Util
 
         public Connection()
         {
-            con.ConnectionString = @$"Server=172.16.0.121;Database=japp;uid=renan;password=Akrk@001";
+            con.ConnectionString = @$"";
         }
 
         public MySqlConnection Conectar()
